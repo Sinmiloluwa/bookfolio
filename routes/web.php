@@ -19,7 +19,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/home', [App\Http\Controllers\BookController::class, 'index']);
 Route::get('/books', [App\Http\Controllers\BookController::class, 'discover'])->name('books.discover');
 Route::get('/books/{bookId}', [App\Http\Controllers\BookController::class, 'view'])->name('books.view');
