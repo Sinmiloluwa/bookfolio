@@ -10,7 +10,8 @@ class BookController extends Controller
     public function home()
     {   
         $books = Book::all();
-        return view('home',compact('books'));
+        $featuredBooks = Book::orderBy('created_at', 'DESC')->paginate(3);
+        return view('home',compact('books','featuredBooks'));
     }
 
     public function index()
