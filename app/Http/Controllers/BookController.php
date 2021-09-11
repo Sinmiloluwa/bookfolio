@@ -7,6 +7,15 @@ use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
+
+    function __construct()
+    {
+        $this->middleware('permission:book-list|book-create|book-edit|book-delete', ['only' => ['view']]);
+        $this->middleware('permission:book-create', ['only' => ['create','store']]);
+        $this->middleware('permission:book-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:book-delete', ['only' => ['destroy']]);
+    }
+
     public function home()
     {   
         $books = Book::all();
@@ -51,5 +60,40 @@ class BookController extends Controller
     {
         $book = Book::find($bookId)->first();
         return view('admin.edit',compact('book'));
+    }
+
+    public function update(Request $request, $bookId)
+    {
+        $book = Book::find($bookId);
+
+        if ($request->cover != '') {
+            $path = public_path().'/uploads/images/';
+
+            if ($book->book_cover != '' && $book->book_cover != null) {
+                $file_old = $path.$book->book_cover;
+                unlink($file_old);
+            }
+
+            $file = $request->cover;
+            $filename = $file->getClientOriginalName();
+            $file->move($path, $filename);
+
+            
+        }
+
+        $book->update([
+            'name' => $request->name,
+            'description' => $request->desc,
+            'author' => $request->author,
+            'book_cover' => $filename
+        ]);
+
+        $book->save();
+        return redirect()->route('admin.books')->with('message', 'Book has been updated');
+
+       
+
+        
+        
     }
 }

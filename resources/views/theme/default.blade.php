@@ -265,8 +265,8 @@
           </li>
 
           <li class="nav-item">
-            <a href="/assets/admin/pages/kanban.html" class="nav-link">
-              <i class="nav-icon fas fa-columns"></i>
+            <a href="{{route('role.index')}}" class="nav-link">
+              <i class="nav-icon fas fa-user-circle"></i>
               <p>
                 Roles
               </p>

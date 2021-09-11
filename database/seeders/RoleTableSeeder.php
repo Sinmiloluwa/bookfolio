@@ -25,6 +25,11 @@ class RoleTableSeeder extends Seeder
                 'id' => 2,
                 'name' => 'admin',
                 'display_name' => 'Admin'
+            ],
+            [
+                'id' => 3,
+                'name' => 'writer',
+                'display_name' => 'Writer'
             ]
             ]);
     }

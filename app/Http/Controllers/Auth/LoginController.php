@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Spatie\Permission\Traits\HasRoles;
 
 class LoginController extends Controller
 {
@@ -20,6 +22,7 @@ class LoginController extends Controller
     */
 
     use AuthenticatesUsers;
+    use HasRoles;
 
     /**
      * Where to redirect users after login.
@@ -27,6 +30,18 @@ class LoginController extends Controller
      * @var string
      */
     protected $redirectTo = RouteServiceProvider::HOME;
+    protected function redirectTo(){
+        $user = Auth::user();
+        if($user->hasRole('Admin')){
+            return route('admin.myHome');
+       }
+    //    elseif (Auth::user()->hasRole('user')) {
+    //         return route('home');
+    //     }
+    //     if (Auth::user()->hasRole('writer')) {
+    //         return route('writer.dashboard');
+    //     }
+    }
 
     /**
      * Create a new controller instance.
@@ -37,4 +52,6 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    
 }

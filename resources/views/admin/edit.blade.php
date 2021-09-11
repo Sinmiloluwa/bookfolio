@@ -29,30 +29,35 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
+                  <form class="" method="post" action="{{url('admin/books/update/'.$book->id)}}" enctype="multipart/form-data">
+                  @csrf
                 <div class="form-group">
                   <label for="title">Title</label>
-                  <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId" value="{{$book->name}}">
+                  <input type="text" name="name" id="" class="form-control" placeholder="" aria-describedby="helpId" value="{{$book->name}}">
                 </div>
 
                 <div class="form-group">
                   <label for="title">Description</label>
-                  <textarea class="form-control" value="{{$book->description}}">{{$book->description}}</textarea>
+                  <textarea class="form-control" value="{{$book->description}}" name="desc">{{$book->description}}</textarea>
                 </div>
 
                 <div class="form-group">
                   <label for="title">Author</label>
-                  <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId" value="{{$book->author}}">
+                  <input type="text" name="author" id="" class="form-control" placeholder="" aria-describedby="helpId" value="{{$book->author}}">
                 </div>
 
                 <div class="form-group">
                   <label for="title">Date Released</label>
-                  <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId" value="{{$book->date_released}}">
+                  <input type="text" name="date" id="" class="form-control" placeholder="" aria-describedby="helpId" value="{{$book->date_released}}">
                 </div>
 
                 <div class="form-group">
-                  <label for="title">DCover</label>
-                  <input type="file" name="" id="" class="form-control" placeholder="" aria-describedby="helpId" value="{{$book->book_cover}}">
+                  <label for="title">Book Cover</label>
+                  <input type="file" name="cover" id="" class="form-control" placeholder="" aria-describedby="helpId" value="{{$book->book_cover}}">
                 </div>
+
+                <button type="submit" class="btn btn-primary">Update</button>
+                  </form>
               </div>
               <!-- /.card-body -->
             </div>

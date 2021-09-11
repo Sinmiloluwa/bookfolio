@@ -15,9 +15,19 @@
               <li class="breadcrumb-item active">Books</li>
             </ol>
           </div>
+          
         </div>
       </div><!-- /.container-fluid -->
     </section>
+    @if(session()->has('message'))
+          <div class="alert alert-primary alert-dismissible fade show" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  <span class="sr-only">Close</span>
+              </button>
+              {{ session()->get('message')}}
+          </div>
+          @endif
 
     <!-- Main content -->
     <section class="content">
@@ -34,9 +44,8 @@
                   <thead>
                   <tr>
                     <th>Name</th>
-                    <th>Author</th>
+                    <th style="width:15%">Author</th>
                     <th style="width:25%">Description</th>
-                    <th>Cover</th>
                     <th>Release Date</th>
                     <th>Action</th>
                   </tr>
@@ -47,7 +56,6 @@
                     <td>{{ucfirst($book->name)}}</td>
                     <td>{{$book->author}}</td>
                     <td>{{$book->description}}</td>
-                    <td>{{$book->book_cover}}</td>
                     <td>{{$book->release_date}}</td>
                     
                     <td><a href="{{route('admin.edit',$book->id)}}" class="btn btn-info btn-sm active" role="button">Edit</a> <a href="#" class="btn btn-danger btn-sm active" role="button">Delete</a> <a href="{{route('admin.show',$book->id)}}" class="btn btn-secondary btn-sm active" role="button">View</a></td>

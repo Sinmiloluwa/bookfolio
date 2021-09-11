@@ -108,7 +108,7 @@
         </header>
         
     </div>
-    <main class="py-4 mt-5">
+    <main class="">
             @yield('content')
         </main>
 

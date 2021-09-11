@@ -19,7 +19,6 @@ class UserTableSeeder extends Seeder
             [
                 'id' => 1,
                 'name' => 'Mofeoluwa',
-                'role_id' => 1,
                 'email' => 'james@gmail.com',
                 'password' => '$2y$10$gnHeL/NuHF6A2Swt1.lQY.I9y1CbSYlXqIx2GOziyO7.x6gkUDqy.',
                 'created_at' => now(),
@@ -28,8 +27,15 @@ class UserTableSeeder extends Seeder
             [
                 'id' => 2,
                 'name' => 'Emma',
-                'role_id' => 2,
                 'email' => 'emmasimons141@gmail.com',
+                'password' => '$2y$10$gnHeL/NuHF6A2Swt1.lQY.I9y1CbSYlXqIx2GOziyO7.x6gkUDqy.',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'id' => 3,
+                'name' => 'Femi',
+                'email' => 'femi@gmail.com',
                 'password' => '$2y$10$gnHeL/NuHF6A2Swt1.lQY.I9y1CbSYlXqIx2GOziyO7.x6gkUDqy.',
                 'created_at' => now(),
                 'updated_at' => now()
