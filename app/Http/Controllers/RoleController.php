@@ -11,7 +11,7 @@ class RoleController extends Controller
 {
     function __construct()
     {
-        $this->middleware('permission:role-list|role-create|role-edit|role-delete', ['only' => ['index', 'view']]);
+        $this->middleware('permission:role-list|role-create|role-edit|role-delete', ['only' => ['view']]);
         $this->middleware('permission:role-create', ['only' => ['create','store']]);
         $this->middleware('permission:role-edit', ['only' => ['edit','update']]);
         $this->middleware('permission:role-delete', ['only' => ['destroy']]);
@@ -30,7 +30,7 @@ class RoleController extends Controller
         return view('roles.create',compact('permission'));
     }
 
-    public function store()
+    public function store(Request $request)
     {
         $this->validate($request, [
             'name' => 'required|unique:roles,name',
@@ -40,7 +40,7 @@ class RoleController extends Controller
         $role = Role::create(['name' => $request->input('name')]);
         $role->syncPermissions($request->input('permission'));
 
-        return redirect()->route('roles.index')
+        return redirect()->route('role.index')
                          ->with('success','Role created successfully');
     }
 
@@ -80,7 +80,7 @@ class RoleController extends Controller
     
         $role->syncPermissions($request->input('permission'));
     
-        return redirect()->route('roles.index')
+        return redirect()->route('role.index')
                         ->with('success','Role updated successfully');
     }
     /**
@@ -92,7 +92,7 @@ class RoleController extends Controller
     public function destroy($id)
     {
         DB::table("roles")->where('id',$id)->delete();
-        return redirect()->route('roles.index')
+        return redirect()->route('role.index')
                         ->with('success','Role deleted successfully');
     }
 }

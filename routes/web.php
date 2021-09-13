@@ -36,6 +36,12 @@ Route::group(['prefix'  =>  'admin', 'middleware' => 'isAdmin','auth','backHisto
     Route::get('/books/{bookId}', [App\Http\Controllers\BookController::class, 'edit'])->name('admin.edit');
     Route::post('/books/update/{bookId}',[App\Http\Controllers\BookController::class, 'update']);
     Route::get('/roles', [App\Http\Controllers\RoleController::class, 'index'])->name('role.index');
+    Route::get('/roles/edit/{id}', [App\Http\Controllers\RoleController::class, 'edit'])->name('role.edit');
+    Route::post('/roles/update/{id}', [App\Http\Controllers\RoleController::class, 'update'])->name('role.update');
+    Route::post('/roles/destroy/{id}', [App\Http\Controllers\RoleController::class, 'destroy'])->name('role.destroy');
+    Route::get('/roles/create', [App\Http\Controllers\RoleController::class, 'create'])->name('role.create');
+    Route::post('/roles/store/', [App\Http\Controllers\RoleController::class, 'store'])->name('role.store');
+    Route::get('/roles/show/{id}', [App\Http\Controllers\RoleController::class, 'show'])->name('role.show');
 });
 
 Route::group(['prefix' => 'writer', 'middleware' => 'writer'], function() {

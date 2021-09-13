@@ -265,7 +265,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="{{route('role.index')}}" class="nav-link">
+            <a href="{{route('role.index')}}" class="nav-link {{ (request()->is('admin/roles')) ? 'active' : '' }}">
               <i class="nav-icon fas fa-user-circle"></i>
               <p>
                 Roles
