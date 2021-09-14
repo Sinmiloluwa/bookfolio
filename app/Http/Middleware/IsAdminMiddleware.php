@@ -21,6 +21,7 @@ class IsAdminMiddleware
         if (Auth::check() && Auth::user()->hasRole('Admin')) {
             $user = Auth::user();
             $user->givePermissionTo('role-edit');
+            $user->givePermissionTo('role-list');
             $user->givePermissionTo('role-delete');
             $user->givePermissionTo('role-create');
             return $next($request);
