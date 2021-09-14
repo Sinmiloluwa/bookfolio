@@ -35,12 +35,12 @@ class LoginController extends Controller
         if($user->hasRole('Admin')){
             return route('admin.myHome');
        }
-    //    elseif (Auth::user()->hasRole('user')) {
-    //         return route('home');
-    //     }
-    //     if (Auth::user()->hasRole('writer')) {
-    //         return route('writer.dashboard');
-    //     }
+       elseif (Auth::user()->hasRole('user')) {
+            return route('home');
+        }
+        if (Auth::user()->hasRole('writer')) {
+            return route('writer.index');
+        }
     }
 
     /**

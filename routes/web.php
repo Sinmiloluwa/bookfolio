@@ -2,7 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\UserAuthController;
+use App\Http\Controllers\Writer\WriterController;
 use App\Http\Controllers\RoleController;
+use App\Http\Middleware\Writer;
+use phpDocumentor\Reflection\Types\Resource_;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,13 +28,14 @@ Route::middleware(['middleware' => 'backHistory'])->group(function (){
 Route::group([ 'middleware' => 'backHistory'], function () {
 Route::get('/home', [App\Http\Controllers\BookController::class, 'home'])->name('home');
 Route::get('/', [App\Http\Controllers\BookController::class, 'index']);
-Route::get('/books', [App\Http\Controllers\BookController::class, 'discover'])->name('books.discover');
+Route::get('/books/discover', [App\Http\Controllers\BookController::class, 'discover'])->name('books.discover');
 Route::get('/books/{bookId}', [App\Http\Controllers\BookController::class, 'view'])->name('books.view');
 });
+
 Route::group(['prefix'  =>  'admin', 'middleware' => 'isAdmin','auth','backHistory'], function () {
 	Route::get('/my-home', [App\Http\Controllers\HomeController::class, 'myHome'])->name('admin.myHome');
     Route::get('/my-users', [App\Http\Controllers\HomeController::class, 'myUsers']);
-    Route::get('/books', [App\Http\Controllers\BookController::class, 'allBooks'])->name('admin.books');
+    Route::get('/books', [App\Http\Controllers\BookController::class, 'allBooks'])->name('books.index');
     Route::get('/books/show/{bookId}', [App\Http\Controllers\BookController::class, 'show'])->name('admin.show');
     Route::get('/books/{bookId}', [App\Http\Controllers\BookController::class, 'edit'])->name('admin.edit');
     Route::post('/books/update/{bookId}',[App\Http\Controllers\BookController::class, 'update']);
@@ -44,6 +48,9 @@ Route::group(['prefix'  =>  'admin', 'middleware' => 'isAdmin','auth','backHisto
     Route::get('/roles/show/{id}', [App\Http\Controllers\RoleController::class, 'show'])->name('role.show');
 });
 
-Route::group(['prefix' => 'writer', 'middleware' => 'writer'], function() {
-    Route::get('/dashboard', [App\Http\Controllers\seller\WriterController::class, 'index'])->name('writer.dashboard');
+Route::group(['middleware' => 'writer'], function() {
+    Route::resource('writer', WriterController::class);
+    Route::post('writer/update/{id}', [WriterController::class, 'update'])->name('writer.update');
+    Route::get('/books', [App\Http\Controllers\Writer\WriterController::class, 'books'])->name('writer.books');
+    Route::post('/book/destroy/{id}', [App\Http\Controllers\Writer\WriterController::class, 'destroy'])->name('writer.destroy');
 });

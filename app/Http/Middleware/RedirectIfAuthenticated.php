@@ -31,6 +31,9 @@ class RedirectIfAuthenticated
             }elseif (Auth::guard($guard)->check() && Auth::user()->hasRole('user')) {
                 return redirect()->route('home');
             }
+            if(Auth::guard($guard)->check() && Auth::user()->hasRole('writer')) {
+                return redirect()->route('writer.index');
+            }
         }
 
         return $next($request);

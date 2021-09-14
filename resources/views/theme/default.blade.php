@@ -255,15 +255,37 @@
               </p>
             </a>
           </li>
+          @if(auth()->user()->hasRole('Admin'))
           <li class="nav-item">
-            <a href="{{route('admin.books')}}" class="nav-link {{ (request()->is('admin/books')) ? 'active' : '' }}">
+            <a href="{{route('books.index')}}" class="nav-link {{ (request()->is('/books')) ? 'active' : '' }}">
               <i class="nav-icon fas fa-columns"></i>
               <p>
                 Books
               </p>
             </a>
           </li>
-
+            @else
+            <li class="nav-item">
+            <a href="{{route('writer.books')}}" class="nav-link {{ (request()->is('books')) ? 'active' : '' }}">
+            <i class="nav-icon fas fa-columns"></i>
+              <p>
+                Books
+              </p>
+            </a>
+          </li>
+          @endif
+          
+          <!-- @can('book-list')
+          <li class="nav-item">
+            <a href="{{route('writer.books')}}" class="nav-link {{ (request()->is('/books')) ? 'active' : '' }}">
+              <i class="nav-icon fas fa-columns"></i>
+              <p>
+                Books
+              </p>
+            </a>
+          </li>
+          @endcan -->
+          @can('role-list')
           <li class="nav-item">
             <a href="{{route('role.index')}}" class="nav-link {{ (request()->is('admin/roles')) ? 'active' : '' }}">
               <i class="nav-icon fas fa-user-circle"></i>
@@ -272,6 +294,7 @@
               </p>
             </a>
           </li>
+          @endcan
          
           <li class="nav-header">Extras</li>
           <li class="nav-item">
