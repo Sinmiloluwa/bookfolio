@@ -41,7 +41,7 @@
                         <nav id="primary-nav" class="dropdown cf">
                             <ul class="dropdown menu">
                                 <li><a class="scrollTo" data-scrollTo="popular" href="#">Popular</a></li>
-                                <li><a href="#">Most Visited</a>
+                                <!-- <li><a href="#">Most Visited</a>
                                     <ul class="sub-menu">
                                         <li><a href="#">Most Visited 1</a>
                                             <ul class="sub-menu">
@@ -66,7 +66,7 @@
                                             </ul>
                                         </li>
                                     </ul>
-                                </li>
+                                </li> -->
                                 <li><a class="scrollTo" data-scrollTo="services" href="#">Our Services</a></li>
                                 <li><a class="scrollTo" data-scrollTo="contact" href="#">Contact Us</a></li>
                                 @guest
@@ -100,6 +100,7 @@
                                 </div>
                             </li>
                         @endguest
+                        <li><a class="scrollTo"  href="{{route('writer.register')}}">Become a Writer</a></li>
                             </ul>
                         </nav><!-- / #primary-nav -->
                     </div>

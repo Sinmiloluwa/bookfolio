@@ -3,9 +3,14 @@
 namespace App\Http\Controllers\Writer;
 
 use App\Models\Book;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use Symfony\Component\Mime\MimeTypes;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class WriterController extends Controller
 {
@@ -17,6 +22,50 @@ class WriterController extends Controller
     public function index()
     {
         return view('writer.dashboard');
+    }
+
+    public function register()
+    {
+        return view('writer.register');
+    }
+
+    public function newWriter(Request $request)
+    {
+
+        $this->validate($request, [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+            'document' => 'required|mimes:pdf'
+        ]);
+
+        if ($request->document != '') {
+            $path = public_path().'/uploads/images/verify';
+
+            $file = $request->document;
+            $filename = $file->getClientOriginalName();
+            $file->move($path, $filename);
+        }
+
+        $role = Role::where('name','writer')->first();
+
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'document' => $filename
+        ]);
+
+     
+        $permissions = Permission::pluck('id','id')->all();
+   
+        $role->syncPermissions($permissions);
+     
+        $user->assignRole('writer');
+
+        return view('writer.verify');
+
     }
 
     public function books()

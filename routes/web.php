@@ -32,6 +32,9 @@ Route::get('/books/discover', [App\Http\Controllers\BookController::class, 'disc
 Route::get('/books/{bookId}', [App\Http\Controllers\BookController::class, 'view'])->name('books.view');
 });
 
+Route::get('/writer/register', [App\Http\Controllers\Writer\WriterController::class, 'register'])->name('writer.register');
+Route::post('/writer/newWriter', [App\Http\Controllers\Writer\WriterController::class, 'newWriter'])->name('writer.newWriter');
+
 Route::group(['prefix'  =>  'admin', 'middleware' => 'isAdmin','auth','backHistory'], function () {
 	Route::get('/my-home', [App\Http\Controllers\HomeController::class, 'myHome'])->name('admin.myHome');
     Route::get('/my-users', [App\Http\Controllers\HomeController::class, 'myUsers']);
