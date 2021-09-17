@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use App\Models\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
 {
@@ -64,12 +65,21 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $data['email_verify_token'] = md5(rand(10000, 99999));
 
         $user =  User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'email_verify_token' => $data['email_verify_token'],
         ]);
+
+        $details = [
+            'title' => 'Mail from Bookfolio.com',
+            'url' =>  'https://google.com/verify/email/'.$data['email_verify_token'],
+        ];
+
+        Mail::to($user->email)->send(new \App\Mail\UserRegistration($details));
 
         $user->assignRole('user');
         return $user;
