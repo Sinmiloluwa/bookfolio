@@ -3,10 +3,20 @@
 
 @section('content')
 
+
+
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
+      @if(auth()->user()->is_verified == 0)
+            <section>
+                <div class="col-md-12">
+                    <h3>Thanks for registering as a writer. We are going over your profile. Please be patient you will be verified shortly!</h3>
+                </div>
+            </section>
+                    
+            @else
         <div class="row mb-2">
           <div class="col-sm-6">
             <div class="alert alert-secondary alert-dismissible fade show" role="alert">
@@ -197,5 +207,5 @@
               </div>
         </div>
     </section>
-
+@endif
 @endsection

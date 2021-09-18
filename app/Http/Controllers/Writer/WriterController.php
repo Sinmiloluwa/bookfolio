@@ -106,8 +106,13 @@ class WriterController extends Controller
      
         $user->assignRole('writer');
 
-        return view('writer.verify');
+        return redirect()->route('writer.index');
 
+    }
+
+    public function dashboard()
+    {
+        return view('writer.dashboard');
     }
 
     public function books()

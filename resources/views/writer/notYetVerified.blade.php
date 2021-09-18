@@ -217,12 +217,6 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-               @if(auth()->user()->is_verified == 0)
-            <section>
-               
-            </section>
-                    
-            @else
           <li class="nav-item menu-open">
             <a href="#" class="nav-link  {{ (request()->is('admin/my-home')) ? 'active' : '' }}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -339,7 +333,6 @@
               </p>
             </a>
           </li>
-          @endif
 
           
           <!-- <li class="nav-item">
@@ -700,7 +693,11 @@
 
   <!-- Content Wrapper. Contains page content -->
   <main class="">
-            @yield('content')
+            <section>
+                <div class="text-center">
+                    <h3>Thanks for registering as a writer. We are going over your profile. Please be patient you will be verified shortly!</h3>
+                </div>
+            </section>
         </main>
   <!-- /.content-wrapper -->
   <footer class="main-footer">

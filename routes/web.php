@@ -63,4 +63,8 @@ Route::group(['middleware' => 'writer'], function() {
     Route::post('writer/update/{id}', [WriterController::class, 'update'])->name('writer.update');
     Route::get('/books', [App\Http\Controllers\Writer\WriterController::class, 'books'])->name('writer.books');
     Route::post('/book/destroy/{id}', [App\Http\Controllers\Writer\WriterController::class, 'destroy'])->name('writer.destroy');
+    Route::get('/notyetverified', function() {
+        return view('writer.notYetVerified');
+    });
+    Route::get('writer/dashboard', [App\Http\Controllers\Writer\WriterController::class, 'dashboard'])->name('writer.dashboard');
 });
