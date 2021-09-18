@@ -274,6 +274,17 @@
             </a>
           </li>
           @endif
+
+          @if(auth()->user()->hasRole('Admin'))
+          <li class="nav-item">
+            <a href="{{route('writer.all')}}" class="nav-link {{ (request()->is('writers')) ? 'active' : '' }}">
+            <i class="nav-icon fas fa-pen"></i>
+              <p>
+                Writer
+              </p>
+            </a>
+          </li>
+          @endif
           
           <!-- @can('book-list')
           <li class="nav-item">

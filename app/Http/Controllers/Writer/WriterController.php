@@ -4,12 +4,15 @@ namespace App\Http\Controllers\Writer;
 
 use App\Models\Book;
 use App\Models\User;
+use App\Models\Writer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Symfony\Component\Mime\MimeTypes;
-use Spatie\Permission\Models\Role;
+use Spatie\Permission\Traits\HasRoles;
 use Spatie\Permission\Models\Permission;
 
 class WriterController extends Controller
@@ -27,6 +30,44 @@ class WriterController extends Controller
     public function register()
     {
         return view('writer.register');
+    }
+
+    public function all()
+    {
+        $writers = User::role('writer')->where('is_verified',1)->get();
+        return view('admin.writer',compact('writers'));
+    }
+
+    public function unverified()
+    {
+        $writers = User::role('writer')->where('is_verified',0)->get();
+        return view('admin.unverified',compact('writers'));
+    }
+
+    public function unverifiedShow($id)
+    {
+        $writers = User::role('writer')->where('is_verified',0)->get();
+        $unverifiedWriter = $writers->where('id',$id)->first();
+        return view('admin.unverifiedShow',compact('unverifiedWriter'));
+    }
+
+    public function verify($id)
+    {
+       $user = User::where('id',$id)->first();
+        DB::table('users')->where('id',$id)->update([
+            'is_verified' => 1 
+        ]);
+
+        $details = [
+            'title' => 'Mail from Bookfolio.com',
+            'body' => 'You have been verified as a writer. You now have access to upload your books',
+        ];
+
+
+        Mail::to($user->email)->send(new \App\Mail\VerifyWriter($details));
+
+        return redirect()->route('writer.unverified')->with('message','User has been verified');
+
     }
 
     public function newWriter(Request $request)
@@ -54,7 +95,8 @@ class WriterController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'document' => $filename
+            'document' => $filename,
+            'is_verified' => 0
         ]);
 
      
@@ -138,6 +180,12 @@ class WriterController extends Controller
         return view('writer.show',compact('book'));
     }
 
+    public function verifiedShow($id)
+    {
+        $verifiedWriter = User::where('id',$id)->first();
+        return view('admin.verifiedShow',compact('verifiedWriter'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -209,5 +257,30 @@ class WriterController extends Controller
         DB::table("books")->where('id',$id)->delete();
         return redirect()->route('writer.books')
                         ->with('success','Book deleted successfully');
+    }
+
+    public function delete($id)
+    {
+        DB::table("users")->where('id',$id)->delete();
+        return redirect()->route('admin.writer')
+                        ->with('success','Book deleted successfully');
+    }
+
+    public function deny($id)
+    {
+        $user = User::where('id',$id)->first();
+        DB::table('users')->where('id',$id)->update([
+            'document' => null, 
+        ]);
+
+        $details = [
+            'title' => 'Mail from Bookfolio.com',
+            'body' => 'There was a problem with the document you submitted. Please try again or use another document',
+        ];
+
+
+        Mail::to($user->email)->send(new \App\Mail\DenyWriter($details));
+
+        return redirect()->route('writer.unverified')->with('message','User not verified');
     }
 }

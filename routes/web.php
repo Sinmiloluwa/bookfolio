@@ -49,6 +49,13 @@ Route::group(['prefix'  =>  'admin', 'middleware' => 'isAdmin','auth','backHisto
     Route::get('/roles/create', [App\Http\Controllers\RoleController::class, 'create'])->name('role.create');
     Route::post('/roles/store/', [App\Http\Controllers\RoleController::class, 'store'])->name('role.store');
     Route::get('/roles/show/{id}', [App\Http\Controllers\RoleController::class, 'show'])->name('role.show');
+    Route::get('/writers', [App\Http\Controllers\Writer\WriterController::class, 'all'])->name('writer.all');
+    Route::get('/writers/unverified', [App\Http\Controllers\Writer\WriterController::class, 'unverified'])->name('writer.unverified');
+    Route::get('/writers/unverified/show/{id}', [App\Http\Controllers\Writer\WriterController::class, 'unverifiedShow'])->name('writer.unverifiedShow');
+    Route::post('writers/verify/{id}',  [App\Http\Controllers\Writer\WriterController::class, 'verify'])->name('writer.verify');
+    Route::get('/writers/verified/show/{id}', [App\Http\Controllers\Writer\WriterController::class, 'verifiedShow'])->name('writer.verifiedShow');
+    Route::post('/writer/destroy/{id}', [App\Http\Controllers\Writer\WriterController::class, 'delete'])->name('writer.delete');
+    Route::post('writers/deny/{id}',  [App\Http\Controllers\Writer\WriterController::class, 'deny'])->name('writer.deny');
 });
 
 Route::group(['middleware' => 'writer'], function() {
