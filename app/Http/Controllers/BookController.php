@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -14,6 +15,13 @@ class BookController extends Controller
         $this->middleware('permission:book-create', ['only' => ['create','store']]);
         $this->middleware('permission:book-edit', ['only' => ['edit','update']]);
         $this->middleware('permission:book-delete', ['only' => ['destroy']]);
+    }
+
+
+    public function pg()
+    {
+        $users = User::all();
+        return view('pg', compact('users'));
     }
 
     public function home()
@@ -91,9 +99,18 @@ class BookController extends Controller
         $book->save();
         return redirect()->route('admin.books')->with('message', 'Book has been updated');
 
-       
+    }
 
+    public function searchBook(Request $request) {
+        $books = Book::where([
+            ['name', '!=', Null],
+            [function ($q) use ($request) {
+                if (($name = $request->bookname)) {
+                    $q->whereRaw('LOWER(`name`) like ?', '%' . $name . '%')->get();
+                }
+            }]
+        ])->get();
         
-        
+        return view('books.searchview', compact('books'));
     }
 }

@@ -3,14 +3,7 @@
 @section('content')
 <section class="our-services" id="services">
         <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="section-heading">
-                        <span>Our Books</span>
-                        <h2>Best Online Library</h2>
-                    </div>
-                </div> 
-            </div> 
+            
             <div class="row">
                 @foreach($books as $book)
                 <div class="col-md-3">

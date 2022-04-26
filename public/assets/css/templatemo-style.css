@@ -571,6 +571,14 @@ section.featured-places {
   border-radius: 50%;
 }
 
+.badde{
+  position: absolute;
+  z-index: 9;
+  top: 30px;
+  right: 30px;
+  text-align: center;
+}
+
 .featured-places .featured-item .thumb .date-content h6 {
   font-size: 24px;
   font-weight: 700;

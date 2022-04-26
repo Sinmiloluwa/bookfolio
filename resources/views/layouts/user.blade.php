@@ -16,6 +16,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mulish&display=swap" rel="stylesheet">
 
     <!-- Styles -->
     <link href="/assets/css/app.css" rel="stylesheet">
@@ -27,7 +28,7 @@
         <link rel="stylesheet" href="/assets/css/datepicker.css">
         <link rel="stylesheet" href="/assets/css/templatemo-style.css">
 </head>
-<body>
+<body style="font-family: 'Mulish';">
     
     <div class="wrap">
         <header id="header">
@@ -119,7 +120,7 @@
                 <div class="col-md-5">
                     <div class="about-veno">
                         <div class="logo">
-                            <img src="img/footer_logo.png" alt="Venue Logo">
+                            <img src="/assets/img/footer_logo.png" alt="Venue Logo">
                         </div>
                         <p>Mauris sit amet quam congue, pulvinar urna et, congue diam. Suspendisse eu lorem massa. Integer sit amet posuere tellus, id efficitur leo. In hac habitasse platea dictumst.</p>
                         <ul class="social-icons">

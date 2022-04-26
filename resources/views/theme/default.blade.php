@@ -192,6 +192,7 @@
         @php
 
         $user = auth()->user();
+      
         
         @endphp
 

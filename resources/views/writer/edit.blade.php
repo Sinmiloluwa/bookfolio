@@ -41,15 +41,6 @@
                   <textarea class="form-control" value="{{$book->description}}" name="desc">{{$book->description}}</textarea>
                 </div>
 
-                <div class="form-group">
-                  <label for="title">Author</label>
-                  <input type="text" name="author" id="" class="form-control" placeholder="" aria-describedby="helpId" value="{{$book->author}}">
-                </div>
-
-                <div class="form-group">
-                  <label for="title">Date Released</label>
-                  <input type="text" name="date" id="" class="form-control" placeholder="" aria-describedby="helpId" value="{{$book->date_released}}">
-                </div>
 
                 <div class="form-group">
                   <label for="title">Book Cover</label>

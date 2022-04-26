@@ -23,13 +23,14 @@ Route::middleware(['middleware' => 'backHistory'])->group(function (){
 });
 
 
-
+Route::get('/pg', [App\Http\Controllers\BookController::class, 'pg']);
 
 Route::group([ 'middleware' => 'backHistory'], function () {
 Route::get('/home', [App\Http\Controllers\BookController::class, 'home'])->name('home');
 Route::get('/', [App\Http\Controllers\BookController::class, 'index']);
 Route::get('/books/discover', [App\Http\Controllers\BookController::class, 'discover'])->name('books.discover');
 Route::get('/books/{bookId}', [App\Http\Controllers\BookController::class, 'view'])->name('books.view');
+Route::get('/book/search', [App\Http\Controllers\BookController::class, 'searchBook'])->name('book.search');
 });
 
 Route::get('/writer/register', [App\Http\Controllers\Writer\WriterController::class, 'register'])->name('writer.register');

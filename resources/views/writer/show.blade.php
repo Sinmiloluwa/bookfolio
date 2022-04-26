@@ -41,6 +41,9 @@
                         <div class="author py-4">
                            <h3>Author:</h3>  {{$book->author}}
                         </div>
+                        <div class="author py-4">
+                           <h3>Pdf</h3>  {{$book->pdf}}
+                        </div>
                         <div class="rating">
 
                         </div>

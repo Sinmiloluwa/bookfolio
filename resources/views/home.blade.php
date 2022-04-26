@@ -14,32 +14,14 @@
                         </div>
                     </div>
                     <div class="submit-form">
-                        <form id="form-submit" action="" method="get">
+                        <form id="form-submit" action="{{route('book.search')}}" method="get">
                             <div class="row">
-                                <div class="col-md-3 first-item">
+                                <div class="col-md-9 first-item">
                                     <fieldset>
-                                        <input name="name" type="text" class="form-control" id="name" placeholder="Your name..." required="">
+                                        <input name="bookname" type="text" class="form-control" id="name" placeholder="Name of Book..." required="">
                                     </fieldset>
                                 </div>
-                                <div class="col-md-3 second-item">
-                                    <fieldset>
-                                        <input name="location" type="text" class="form-control" id="location" placeholder="Type location..." required="">
-                                    </fieldset>
-                                </div>
-                                <div class="col-md-3 third-item">
-                                    <fieldset>
-                                        <select required name='category' onchange='this.form.()'>
-                                            <option value="">Select category...</option>
-                                            <option value="Shops">Shops</option>
-                                            <option value="Hotels">Hotels</option>
-                                            <option value="Restaurants">Restaurants</option>
-                                            <option value="Events">Events</option>
-                                            <option value="Meetings">Meetings</option>
-                                            <option value="Fitness">Fitness</option>
-                                            <option value="Cafes">Cafes</option>
-                                        </select>
-                                    </fieldset>
-                                </div>
+        
                                 <div class="col-md-3">
                                     <fieldset>
                                         <button type="submit" id="form-submit" class="btn">Search Now</button>
@@ -57,8 +39,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="section-heading">
-                        <span>Popular Books</span>
-                        <h2>Integer sapien odio</h2>
+                        <h2 style="color:black; font-weight:bolds">Popular Books</h2>
                     </div>
                 </div> 
             </div> 
@@ -66,7 +47,7 @@
                 @foreach($books as $book)
                 <div class="item popular-item">
                     <div class="thumb">
-                        <img src="assets/img/popular_item_1.jpg" alt="">
+                        <img src="{{url('uploads/images/',$book->book_cover)}}" width="50px" height="250px" alt="">
                         <div class="text-content">
                             <h4>{{$book->name}}</h4>
                             <span>{{$book->author}}</span>
@@ -85,8 +66,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="section-heading">
-                        <span>Featured Books</span>
-                        <h2>Praesent nec dui sed urna</h2>
+                        <h2>Featured Books</h2>
                     </div>
                 </div> 
             </div> 
@@ -105,14 +85,15 @@
                                     <li><i class="fa fa-star"></i></li>
                                 </ul>
                             </div>
-                            <div class="date-content">
-                                <h6>28</h6>
-                                <span>August</span>
-                            </div>
+                           <button class="btn badde">
+                                    <span class="badge bg-danger">Featured</span>
+                           </button>
                         </div>
                         <div class="down-content">
                             <h4>{{$featuredBook->name}}</h4>
-                            <span>Category One</span>
+                            @foreach($featuredBook->categories as $category)
+                            <span>{{$category->name}}</span>
+                            @endforeach
                             <p>Vestibulum id est eu felis vulputate hendrerit. Suspendisse dapibus turpis in dui pulvinar imperdiet. Nunc consectetur.</p>
                             <div class="row">
                                 <div class="col-md-6 first-button">
@@ -138,37 +119,36 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="section-heading">
-                        <span>Our Services</span>
-                        <h2>Best Online Library</h2>
+                        <h2>Our Services</h2>
                     </div>
                 </div> 
             </div> 
             <div class="row">
                 <div class="col-md-4">
-                    <div class="service-item">
+                    <div class="service-item bg-secondary">
                         <div class="icon">
                             <img src="img/service_icon_1.png" alt="">
                         </div>
-                        <h4>Large Search Indexing</h4>
-                        <p>Etiam viverra nibh at lorem hendrerit porta non nec ligula. Donec hendrerit porttitor pretium. Suspendisse fermentum nec risus.</p>
+                        <h4 style="color: black;">Large Search Indexing</h4>
+                        <p style="color: black;">Etiam viverra nibh at lorem hendrerit porta non nec ligula. Donec hendrerit porttitor pretium. Suspendisse fermentum nec risus.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="service-item">
+                    <div class="service-item bg-secondary">
                         <div class="icon">
                             <img src="img/service_icon_2.png" alt="">
                         </div>
-                        <h4>Variety of Books</h4>
-                        <p>Vivamus nec vehicula felis, sit amet convallis ex. Aenean dolor risus, rutrum at tincidunt eget, placerat ac mauris.</p>
+                        <h4 style="color: black;">Variety of Books</h4>
+                        <p style="color: black;"> Vivamus nec vehicula felis, sit amet convallis ex. Aenean dolor risus, rutrum at tincidunt eget, placerat ac mauris.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="service-item">
+                    <div class="service-item bg-secondary">
                         <div class="icon">
                             <img src="img/service_icon_3.png" alt="">
                         </div>
-                        <h4>Fast Customer Service</h4>
-                        <p>Praesent nec dui sed urna pharetra dapibus at ac elit. Aenean hendrerit metus leo, quis viverra purus condimentum nec.</p>
+                        <h4 style="color: black;">Fast Customer Service</h4>
+                        <p style="color: black;">Praesent nec dui sed urna pharetra dapibus at ac elit. Aenean hendrerit metus leo, quis viverra purus condimentum nec.</p>
                     </div>
                 </div>
             </div>
@@ -180,9 +160,6 @@
                                 <div class="left-content">
                                     <h4>Testimonials</h4>
                                     <p>Aenean hendrerit metus leo, quis viverra purus condimentum nec. Pellentesque a sem semper, lobortis mauris non, varius urna. Quisque sodales purus eu tellus fringilla.<br><br>Mauris sit amet quam congue, pulvinar urna et, congue diam. Suspendisse eu lorem massa. Integer sit amet posuere tellus, id efficitur leo. In hac habitasse platea dictumst.</p>
-                                    <div class="blue-button">
-                                        <a href="#">Discover More</a>
-                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-5">
@@ -222,77 +199,7 @@
         </video>
     </section>
 
-    <section class="pricing-tables">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="section-heading">
-                        <span>Pricing Tables</span>
-                        <h2>Duis molestie ipsum id faucibus fermentum</h2>
-                    </div>
-                </div> 
-            </div> 
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="table-item">
-                        <div class="top-content">
-                            <h4>Starter Plan</h4>
-                            <h1>$25</h1>
-                            <span>/monthly</span>
-                        </div>
-                        <ul>
-                            <li><a href="#">100 Suspendisse dapibus</a></li>
-                            <li><a href="#">10x Paleo celiac enamel</a></li>
-                            <li><a href="#">Williamsburg organic post ironic</a></li>
-                            <li><a href="#">Helvetica pinterest yuccie</a></li>
-                            <li><a href="#">Plaid shabby chic godard</a></li>
-                        </ul>
-                        <div class="blue-button">
-                            <a href="#">Buy It Now</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="table-item">
-                        <div class="top-content">
-                            <h4>Premium Plan</h4>
-                            <h1>$45</h1>
-                            <span>/monthly</span>
-                        </div>
-                        <ul>
-                            <li><a href="#">200 Suspendisse dapibus</a></li>
-                            <li><a href="#">20x Paleo celiac enamel</a></li>
-                            <li><a href="#">Williamsburg organic post ironic</a></li>
-                            <li><a href="#">Helvetica pinterest yuccie</a></li>
-                            <li><a href="#">Plaid shabby chic godard</a></li>
-                        </ul>
-                        <div class="blue-button">
-                            <a href="#">Buy It Now</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="table-item">
-                        <div class="top-content">
-                            <h4>Advanced Plan</h4>
-                            <h1>$85</h1>
-                            <span>/monthly</span>
-                        </div>
-                        <ul>
-                            <li><a href="#">400 Suspendisse dapibus</a></li>
-                            <li><a href="#">40x Paleo celiac enamel</a></li>
-                            <li><a href="#">Williamsburg organic post ironic</a></li>
-                            <li><a href="#">Helvetica pinterest yuccie</a></li>
-                            <li><a href="#">Plaid shabby chic godard</a></li>
-                        </ul>
-                        <div class="blue-button">
-                            <a href="#">Buy It Now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+   
 
     
 @endsection

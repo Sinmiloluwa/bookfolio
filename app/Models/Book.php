@@ -15,6 +15,10 @@ class Book extends Model
         return $this->belongsToMany(Category::class, 'book_categories','book_id','category_id');
     }
 
+    public function getName() {
+        return $this->categories->pluck('name');
+    }
+
     public function writer()
     {
         return $this->belongsTo(Writer::class);

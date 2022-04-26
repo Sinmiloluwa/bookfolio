@@ -56,6 +56,8 @@
                   <input type="file" name="cover" id="" class="form-control" placeholder="" aria-describedby="helpId" value="{{$book->book_cover}}">
                 </div>
 
+                
+
                 <button type="submit" class="btn btn-primary">Update</button>
                   </form>
               </div>

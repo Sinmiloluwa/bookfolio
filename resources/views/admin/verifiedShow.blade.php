@@ -39,7 +39,7 @@
                            <h3>Email:</h3>  {{$verifiedWriter->email}}
                         </div>
                         <div class="author py-4">
-                           <h3>Document:</h3>  <a href="{{url('uploads/images/verify/',$verifiedWriter->document)}}" target="blank">{{$unverifiedWriter->document}}</a>
+                           <h3>Document:</h3>  <a href="{{url('uploads/images/verify/',$verifiedWriter->document)}}" target="blank">{{$verifiedWriter->document}}</a>
                         </div>
                         
                 </div>
